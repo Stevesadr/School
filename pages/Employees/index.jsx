@@ -1,4 +1,5 @@
 import { GET } from "@/API/getRepository";
+import Card from "@/Components/Ficher/Card";
 import React from "react";
 
 const index = (props) => {
@@ -17,9 +18,19 @@ const index = (props) => {
 export default index;
 
 export async function getStaticProps() {
-  const urlEmployeesAPI = await GET("adv/employeeinformation/");
-  const resEmployeesAPI = await urlEmployeesAPI.json();
-  return {
-    props: { resEmployeesAPI },
-  };
+  try {
+    const urlEmployeesAPI = await GET("adv/employeeinformation/");
+    const resEmployeesAPI = await urlEmployeesAPI.json();
+
+    return {
+      props: { resEmployeesAPI },
+      revalidate: 86400, 
+    };
+  } catch (error) {
+    console.error("خطا در دریافت داده‌ها:", error);
+    return {
+      props: { resEmployeesAPI: [] },
+      revalidate: 86400, 
+    };
+  }
 }
