@@ -9,7 +9,7 @@ import Cookies from "js-cookie";
 import { useRouter } from "next/router";
 import Loader from "@/Components/Ficher/Loader";
 
-const Koodak = localFont({ src: "../public/fonts/KoodakBold.woff" });
+const Koodak = localFont({ src: "../public/Fonts/KoodakBold.woff" });
 
 export default function App({ Component, pageProps }) {
   const [isOpen, setIsOpen] = useState(false);
@@ -20,7 +20,7 @@ export default function App({ Component, pageProps }) {
   useEffect(() => {
     setTimeout(() => {
       setFirstLoading(false);
-    }, 1500); // شبیه‌سازی مدت‌زمان بارگذاری
+    }, 1500);
   }, []);
 
   useEffect(() => {
@@ -55,14 +55,12 @@ export default function App({ Component, pageProps }) {
           <NavContext.Provider
             value={{ isOpen, setIsOpen, isLoggedIn, setIsLoggedIn }}
           >
-            <div>
-              <Nav />
-            </div>
+            <Nav />
+
             <Component {...pageProps} />
           </NavContext.Provider>
-          <div>
-            <Footer />
-          </div>
+
+          <Footer />
         </div>
       )}
     </>
